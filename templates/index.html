@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fish Disease Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Fish Disease Detection</h1>
+    <p>Upload an image of the fish or take a photo to check for diseases.</p>
+    
+    <!-- Buttons for actions -->
+    <button id="uploadImageBtn">Upload Image</button>
+    <button id="takePhotoBtn">Take a Photo</button>
+    <!-- Image preview section -->
+    <div id="imagePreview">
+        <img id="imagePreviewImg" width="300" />
+    </div>
+    <button id="checkDiseaseBtn">Check for Disease</button>
+    
+
+    <!-- Camera input section -->
+    <div id="cameraSection" style="display: none;">
+        <video id="video" width="300" autoplay></video>
+        <button id="captureBtn">Capture Photo</button>
+        <canvas id="canvas" style="display:none;"></canvas>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        let imageBase64 = "";
+
+        // Show file input to upload image
+        $("#uploadImageBtn").click(function() {
+            let fileInput = $("<input type='file' id='imageInput' name='image'>");
+            fileInput.trigger("click");
+            fileInput.change(function() {
+                let file = this.files[0];
+                let reader = new FileReader();
+                reader.onloadend = function() {
+                    imageBase64 = reader.result.split(',')[1];
+                    $("#imagePreview").show();
+                    $("#imagePreviewImg").attr("src", reader.result);
+                };
+                reader.readAsDataURL(file);
+            });
+        });
+
+        // Open camera to take a photo
+        $("#takePhotoBtn").click(function() {
+            $("#cameraSection").show();
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function(stream) {
+                    $("#video")[0].srcObject = stream;
+                    $("#captureBtn").click(function() {
+                        let canvas = document.getElementById("canvas");
+                        canvas.width = video.videoWidth;
+                        canvas.height = video.videoHeight;
+                        canvas.getContext("2d").drawImage(video, 0, 0);
+                        imageBase64 = canvas.toDataURL().split(',')[1];
+                        $("#imagePreview").show();
+                        $("#imagePreviewImg").attr("src", canvas.toDataURL());
+                        stream.getTracks().forEach(track => track.stop());
+                    });
+                })
+                .catch(function(err) {
+                    alert("Error accessing the camera: " + err);
+                });
+        });
+
+        // Redirect to result page and send image data for prediction
+        $("#checkDiseaseBtn").click(function() {
+            if (!imageBase64) {
+                alert("Please upload or take a photo first!");
+                return;
+            }
+
+            // Send the image to backend and redirect to the result page
+            $.ajax({
+                url: "/predict",
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ "image": imageBase64 }),
+                success: function(response) {
+                    // Store the result in local storage or pass it via a URL parameter
+                    // Redirect to result page and pass the prediction result as query parameter
+                    window.location.href = "/result?result=" + encodeURIComponent(JSON.stringify(response));
+                },
+                error: function() {
+                    alert("Error occurred during prediction.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

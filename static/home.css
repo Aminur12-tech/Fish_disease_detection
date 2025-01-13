@@ -1,0 +1,68 @@
+/* General reset for padding and margin */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background-image: url("/static/images/istockphoto-696552116-612x612.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #F6F4F0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .container {
+    text-align: center;
+    padding: 20px;
+    
+  }
+  
+  .logo {
+    background-image: url("/static/assets/WhatsApp\ Image\ 2025-01-10\ at\ 10.56.59\ AM.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
+    border-radius: 75px; /* Making the image circular */
+    margin-top: 20px;
+  }
+  
+  .title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #79D7BE;
+    margin-bottom: 10px;
+    margin-top: 20px;
+  }
+  
+  .subtitle {
+    font-size: 16px;
+    color: #F6F4F0;
+    margin-bottom: 30px;
+    margin-top: 20px;
+  }
+  
+  .button {
+    background-color: #37AFE1;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #2c8cb5;
+  }
+
+  

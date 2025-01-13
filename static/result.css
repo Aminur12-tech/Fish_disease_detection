@@ -1,0 +1,68 @@
+/* General reset for padding and margin */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url("/static/images/istockphoto-696552116-612x612.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.result-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+#predictionResult {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+}
+
+#predictionResult h1 {
+    color: #2e5077;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+#predictionText {
+    font-size: 20px;
+    color: #2e5077;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.backBtn {
+    background-color: #37AFE1;
+    padding: 10px 20px;
+    border-radius: 25px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    display: inline-block;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.backBtn:hover {
+    background-color: #2c8cb5;
+}

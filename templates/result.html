@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fish Disease Detection - Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='result.css') }}">
+</head>
+<body>
+    <div class="result-container">
+        <h1>Prediction Result</h1>
+        <div id="predictionResult">
+            <p id="predictionText"></p>
+        </div>
+
+        <a href="/index" class="backBtn">Go Back</a>
+    </div>
+
+    <script>
+        // Retrieve the prediction result from the URL query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const predictionResult = urlParams.get('result');
+
+        if (predictionResult) {
+            // Display the result if available
+            document.getElementById("predictionText").innerHTML = "Prediction: " + predictionResult;
+        } else {
+            // Display a default message if no result is available
+            document.getElementById("predictionText").innerHTML = "No prediction result available.";
+        }
+    </script>
+</body>
+</html>

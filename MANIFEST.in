@@ -1,0 +1,2 @@
+include fish_classifier/*.h5
+include fish_classifier/dataset.zip
